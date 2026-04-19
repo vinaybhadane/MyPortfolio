@@ -1,0 +1,3 @@
+Replace this file with your actual resume PDF.
+Filename should be: resume.pdf
+Location: /public/resume.pdf
