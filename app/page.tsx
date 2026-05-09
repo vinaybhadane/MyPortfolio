@@ -15,41 +15,21 @@ import LoadingScreen from '@/components/LoadingScreen';
 export default function Home() {
   useEffect(() => {
     let lenis: any;
-
-    // Lenis smooth scroll initialization
-    const initLenis = async () => {
+    const init = async () => {
       try {
-        const LenisModule = (await import('lenis')).default;
-        
-        lenis = new LenisModule({
-          duration: 1.4,
+        const Lenis = (await import('lenis')).default;
+        lenis = new Lenis({
+          duration: 1.5,
           easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           orientation: 'vertical',
           smoothWheel: true,
         });
-
-        // Fixed: Defined as a const arrow function to avoid ES5 strict mode errors
-        const raf = (time: number) => {
-          if (lenis) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-          }
-        };
-
+        const raf = (time: number) => { lenis?.raf(time); requestAnimationFrame(raf); };
         requestAnimationFrame(raf);
-      } catch (e) {
-        console.error('Lenis failed to initialize:', e);
-      }
+      } catch (e) { console.error(e); }
     };
-
-    initLenis();
-
-    // Proper cleanup outside the async scope
-    return () => {
-      if (lenis) {
-        lenis.destroy();
-      }
-    };
+    init();
+    return () => lenis?.destroy();
   }, []);
 
   return (

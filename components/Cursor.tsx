@@ -3,68 +3,76 @@
 import { useEffect, useRef } from 'react';
 
 export default function Cursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const trailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const cursor = cursorRef.current;
-    const trail = trailRef.current;
-    if (!cursor || !trail) return;
-
-    let mouseX = 0, mouseY = 0;
-    let trailX = 0, trailY = 0;
-    let rafId: number;
+    let x = 0, y = 0, ringX = 0, ringY = 0;
+    let raf: number;
 
     const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursor.style.transform = `translate(${mouseX - 8}px, ${mouseY - 8}px)`;
+      x = e.clientX; y = e.clientY;
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
+      }
+      if (trailRef.current) {
+        trailRef.current.style.transform = `translate(${x - 200}px, ${y - 200}px)`;
+      }
     };
 
-    const animateTrail = () => {
-      trailX += (mouseX - trailX) * 0.12;
-      trailY += (mouseY - trailY) * 0.12;
-      trail.style.transform = `translate(${trailX - 20}px, ${trailY - 20}px)`;
-      rafId = requestAnimationFrame(animateTrail);
+    const animate = () => {
+      ringX += (x - ringX) * 0.12;
+      ringY += (y - ringY) * 0.12;
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`;
+      }
+      raf = requestAnimationFrame(animate);
     };
 
-    const onEnterLink = () => {
-      cursor.style.transform += ' scale(2.5)';
-      cursor.style.background = 'rgba(0, 212, 255, 0.5)';
-      trail.style.opacity = '0';
+    const onEnter = () => {
+      if (dotRef.current) dotRef.current.style.transform += ' scale(2.5)';
+      if (ringRef.current) ringRef.current.style.opacity = '0.5';
     };
-
-    const onLeaveLink = () => {
-      cursor.style.background = 'rgba(0, 212, 255, 0.9)';
-      trail.style.opacity = '1';
+    const onLeave = () => {
+      if (ringRef.current) ringRef.current.style.opacity = '1';
     };
 
     document.addEventListener('mousemove', onMove);
-    animateTrail();
-
-    const links = document.querySelectorAll('a, button, [data-hover]');
-    links.forEach(l => {
-      l.addEventListener('mouseenter', onEnterLink);
-      l.addEventListener('mouseleave', onLeaveLink);
+    document.querySelectorAll('a,button,[role=button]').forEach(el => {
+      el.addEventListener('mouseenter', onEnter);
+      el.addEventListener('mouseleave', onLeave);
     });
+    raf = requestAnimationFrame(animate);
 
     return () => {
       document.removeEventListener('mousemove', onMove);
-      cancelAnimationFrame(rafId);
+      cancelAnimationFrame(raf);
     };
   }, []);
 
   return (
     <>
-      <div
-        ref={cursorRef}
-        className="fixed top-0 left-0 w-4 h-4 rounded-full bg-accent/90 pointer-events-none z-[9998] transition-transform duration-75 mix-blend-screen hidden md:block"
-        style={{ willChange: 'transform' }}
-      />
+      {/* Glow halo */}
       <div
         ref={trailRef}
-        className="fixed top-0 left-0 w-10 h-10 rounded-full border border-accent/30 pointer-events-none z-[9997] hidden md:block"
-        style={{ willChange: 'transform' }}
+        className="fixed top-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none z-[9998]"
+        style={{
+          background: 'radial-gradient(circle, rgba(0,245,255,0.04) 0%, transparent 65%)',
+          transition: 'transform 0.06s linear',
+        }}
+      />
+      {/* Ring */}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-accent/60 pointer-events-none z-[9999]"
+        style={{ transition: 'transform 0.08s linear, opacity 0.2s' }}
+      />
+      {/* Dot */}
+      <div
+        ref={dotRef}
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-accent pointer-events-none z-[9999]"
+        style={{ boxShadow: '0 0 8px rgba(0,245,255,0.9)', transition: 'transform 0.04s linear' }}
       />
     </>
   );
