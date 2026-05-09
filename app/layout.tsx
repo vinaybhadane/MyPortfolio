@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     canonical: 'https://vinayportfolio-dev.vercel.app',
   },
   verification: {
-    google: 'mBGeXDsDLSiK3E-aukbegHhamZUaeisBcsJwaB2dhBc',
+    google: 'CR_rehzBMmYahce__vv6wZnhvpJ9-IBdML7QeesShv4',
   },
 };
 
