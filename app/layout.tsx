@@ -2,11 +2,24 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://vinaybhadane.dev'), // Replace with actual domain if different
-  title: 'Vinay Bhadane — Full-Stack Developer & Software Engineer',
-  description: 'Portfolio of Vinay Bhadane. Discover my futuristic digital experiences built with Next.js, React, Node.js, and Blockchain technologies. Explore my projects, skills, and resume.',
-  keywords: ['Vinay Bhadane', 'Full Stack Developer', 'Software Engineer', 'React Developer', 'Next.js Expert', 'Web Developer Nashik', 'Blockchain Developer', 'Creative Developer', 'Frontend Engineer', 'Portfolio'],
-  authors: [{ name: 'Vinay Bhadane', url: 'https://vinaybhadane.dev' }],
+  metadataBase: new URL('https://vinayportfolio-dev.vercel.app'), // Replace with actual domain if different
+  title: 'Vinay Bhadane — Computer Engineering Student & Web Developer | MET BKC Nashik',
+  description: 'Portfolio of Vinay Bhadane, a Computer Engineering Student at MET Bhujbal Knowledge City (MET Institute of Engineering) Nashik. A passionate web developer building futuristic digital experiences with Next.js, React, Node.js, and Blockchain.',
+  keywords: [
+    'vinay bhadane', 
+    'web developer', 
+    'portfolio of web developer', 
+    'MET BKC NASHIK', 
+    'Met Bhujbal Knowledge City', 
+    'Met Institute of Engineering', 
+    'Computer Engineering Student',
+    'Full Stack Developer',
+    'React Developer',
+    'Next.js Expert',
+    'Nashik Web Developer',
+    'Blockchain Developer'
+  ],
+  authors: [{ name: 'Vinay Bhadane', url: 'https://vinayportfolio-dev.vercel.app' }],
   creator: 'Vinay Bhadane',
   publisher: 'Vinay Bhadane',
   robots: {
@@ -21,9 +34,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Vinay Bhadane — Full-Stack Developer & Software Engineer',
-    description: 'Futuristic portfolio of Vinay Bhadane. Explore innovative web applications, blockchain projects, and modern UI designs.',
-    url: 'https://vinaybhadane.dev',
+    title: 'Vinay Bhadane — Web Developer & Computer Engineering Student | MET BKC Nashik',
+    description: 'Portfolio of Vinay Bhadane. Explore innovative web applications, blockchain projects, and modern UI designs from a Computer Engineering Student at MET Institute of Engineering.',
+    url: 'https://vinayportfolio-dev.vercel.app',
     siteName: 'Vinay Bhadane Portfolio',
     images: [
       {
@@ -44,12 +57,11 @@ export const metadata: Metadata = {
     images: ['/images/profile.jpg'],
   },
   alternates: {
-    canonical: 'https://vinaybhadane.dev',
+    canonical: 'https://vinayportfolio-dev.vercel.app',
   },
-  // Add this inside once you have Google Search Console verification code:
-  // verification: {
-  //   google: 'your-google-verification-code',
-  // },
+  verification: {
+    google: 'mBGeXDsDLSiK3E-aukbegHhamZUaeisBcsJwaB2dhBc',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

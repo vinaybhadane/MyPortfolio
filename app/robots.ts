@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/'],
     },
-    sitemap: 'https://vinaybhadane.dev/sitemap.xml',
+    sitemap: 'https://vinayportfolio-dev.vercel.app/sitemap.xml',
   };
 }
