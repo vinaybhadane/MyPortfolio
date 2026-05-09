@@ -77,11 +77,16 @@ function SkillBar({ name, level, color, inView, delay }: {
       </div>
       <div className="skill-track">
         <motion.div
-          className="skill-fill"
-          initial={{ width: 0 }}
-          animate={inView ? { width: `${level}%` } : { width: 0 }}
+          className="skill-fill origin-left"
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: level / 100 } : { scaleX: 0 }}
           transition={{ duration: 1.4, delay, ease: [0.22, 1, 0.36, 1] }}
-          style={{ background: `linear-gradient(90deg, ${color}80, ${color})`, boxShadow: `0 0 8px ${color}60` }}
+          style={{ 
+            width: '100%',
+            background: `linear-gradient(90deg, ${color}80, ${color})`, 
+            boxShadow: `0 0 8px ${color}60`,
+            willChange: 'transform'
+          }}
         />
       </div>
     </div>

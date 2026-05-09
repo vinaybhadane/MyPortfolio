@@ -59,20 +59,20 @@ export default function Cursor() {
         className="fixed top-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none z-[9998]"
         style={{
           background: 'radial-gradient(circle, rgba(0,245,255,0.04) 0%, transparent 65%)',
-          transition: 'transform 0.06s linear',
+          willChange: 'transform',
         }}
       />
       {/* Ring */}
       <div
         ref={ringRef}
         className="fixed top-0 left-0 w-8 h-8 rounded-full border border-accent/60 pointer-events-none z-[9999]"
-        style={{ transition: 'transform 0.08s linear, opacity 0.2s' }}
+        style={{ transition: 'opacity 0.2s', willChange: 'transform, opacity' }}
       />
       {/* Dot */}
       <div
         ref={dotRef}
         className="fixed top-0 left-0 w-2 h-2 rounded-full bg-accent pointer-events-none z-[9999]"
-        style={{ boxShadow: '0 0 8px rgba(0,245,255,0.9)', transition: 'transform 0.04s linear' }}
+        style={{ boxShadow: '0 0 8px rgba(0,245,255,0.9)', willChange: 'transform' }}
       />
     </>
   );

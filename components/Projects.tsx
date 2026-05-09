@@ -91,11 +91,12 @@ function ImageSlideshow({ images, color, autoPlay = true, hoverPause = false }: 
           key={index}
           src={images[index]}
           alt={`Screenshot ${index + 1}`}
-          className="absolute inset-0 w-full h-full object-cover opacity-80 mix-blend-screen"
+          className="absolute inset-0 w-full h-full object-cover opacity-80"
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 0.8, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
+          style={{ willChange: 'opacity, transform' }}
         />
       </AnimatePresence>
       
