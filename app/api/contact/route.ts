@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     const { name, email, message } = await req.json();
 
     // 1. Rate Limiting Check
-    const ip = req.ip || req.headers.get('x-forwarded-for') || 'unknown';
+    const ip = req.headers.get('x-forwarded-for') || 'unknown';
     const now = Date.now();
     let timestamps = rateLimitMap.get(ip) || [];
     
